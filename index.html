@@ -1,397 +1,422 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soal Selidik DOBIABU</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kajian Selidik DOBIABU</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #4cc9f0;
+      --secondary: #4361ee;
+      --bg-dark: #1a1a2e;
+      --glass: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at top right, #16213e, #0f3460, #1a1a2e);
+      color: white;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin: 0;
       padding: 20px;
     }
+
+    /* Container Utama */
     .form-container {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 32px;
-      width: 90%;
-      max-width: 650px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-    .logo {
-      font-family: 'Fredoka One', cursive;
-      font-size: 2.2rem;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .subtitle {
-      text-align: center;
-      opacity: 0.85;
-      margin-bottom: 28px;
-      font-weight: 500;
-    }
-    .form-section {
-      margin-bottom: 28px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #4cc9f0;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .form-input, .form-select, .form-textarea {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
       width: 100%;
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(255, 255, 255, 0.08);
-      color: white;
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
+      max-width: 600px;
+      padding: 40px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
     }
-    .form-input::placeholder, .form-textarea::placeholder {
-      color: rgba(255, 255, 255, 0.6);
-    }
-    .radio-group, .checkbox-group {
+
+    /* Progress Bar */
+    .progress-bar {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 8px;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      position: relative;
     }
-    .radio-item, .checkbox-item {
+    .progress-bar::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+      transform: translateY(-50%);
+    }
+    .step-indicator {
+      width: 35px;
+      height: 35px;
+      background: #1a1a2e;
+      border: 2px solid var(--border);
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      z-index: 1;
+      font-weight: bold;
+      transition: 0.3s;
     }
-    .radio-item input, .checkbox-item input {
-      accent-color: #4361ee;
+    .step-indicator.active {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 0 15px var(--primary);
     }
-    .likert-row {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      margin-top: 8px;
-    }
-    .likert-item {
-      text-align: center;
-    }
-    .likert-item input {
-      margin-bottom: 4px;
-      accent-color: #4361ee;
-    }
-    .submit-btn {
-      background: #4361ee;
-      color: white;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 12px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: 1.1rem;
-      cursor: pointer;
-      width: 100%;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
-    }
-    .submit-btn:hover {
-      background: #3a56e4;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(67, 97, 238, 0.35);
-    }
-    .success-message {
-      text-align: center;
-      padding: 20px;
-      color: #4ade80;
-      font-weight: 600;
+
+    /* Form Steps */
+    .form-step {
       display: none;
+      animation: fadeIn 0.5s ease;
     }
+    .form-step.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    h2 { margin-bottom: 20px; color: var(--primary); }
+    label { display: block; margin: 15px 0 8px; font-weight: 600; font-size: 0.95rem; }
+
+    /* Custom Inputs */
+    .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .radio-card {
+      position: relative;
+    }
+    .radio-card input { display: none; }
+    .radio-card span {
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .radio-card input:checked + span {
+      background: var(--secondary);
+      border-color: var(--primary);
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+    }
+
+    /* Rating Stars */
+    .rating {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      gap: 5px;
+    }
+    .rating input { display: none; }
+    .rating label {
+      cursor: pointer;
+      width: 30px;
+      font-size: 25px;
+      color: #555;
+      margin: 0;
+      transition: 0.2s;
+    }
+    .rating label::before { content: '★'; }
+    .rating input:checked ~ label,
+    .rating input:checked ~ label ~ label { color: #ffd700; text-shadow: 0 0 10px #ffd700; }
+    .rating label:hover,
+    .rating label:hover ~ label { color: #ffd700; }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 12px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: white;
+      font-family: inherit;
+    }
+    textarea { resize: vertical; min-height: 80px; }
+
+    /* Buttons */
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    button {
+      padding: 12px 25px;
+      border-radius: 10px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn-prev { background: rgba(255,255,255,0.1); color: white; }
+    .btn-next { background: var(--primary); color: #000; }
+    .btn-submit { background: linear-gradient(45deg, #00b09b, #96c93d); color: white; width: 100%; }
+    
+    button:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+    /* Checkbox Style */
+    .checkbox-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .check-card input { display: none; }
+    .check-card span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .check-card input:checked + span {
+      background: rgba(76, 201, 240, 0.2);
+      border-color: var(--primary);
+    }
+    .check-card span i { color: var(--primary); }
+
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fredoka+One&display=swap" rel="stylesheet">
 </head>
 <body>
+
   <div class="form-container">
-    <div class="logo">DOBIABU</div>
-    <div class="subtitle">Soal Selidik Pengguna – Bantu Kami Meningkatkan Perkhidmatan</div>
-    
-    <form id="surveyForm">
-      <!-- Bahagian A: Profil Pengguna -->
-      <div class="form-section">
-        <div class="section-title">Bahagian A: Profil Pengguna</div>
-        
-        <div class="form-group">
-          <label class="form-label">1. Umur</label>
-          <div class="radio-group">
-            <div class="radio-item"><input type="radio" name="umur" value="18-25" required><span>18–25 tahun</span></div>
-            <div class="radio-item"><input type="radio" name="umur" value="26-35"><span>26–35 tahun</span></div>
-            <div class="radio-item"><input type="radio" name="umur" value="36-45"><span>36–45 tahun</span></div>
-            <div class="radio-item"><input type="radio" name="umur" value="46+"><span>46+ tahun</span></div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">2. Jantina</label>
-          <div class="radio-group">
-            <div class="radio-item"><input type="radio" name="jantina" value="lelaki" required><span>Lelaki</span></div>
-            <div class="radio-item"><input type="radio" name="jantina" value="perempuan"><span>Perempuan</span></div>
-            <div class="radio-item"><input type="radio" name="jantina" value="lain"><span>Tidak mahu nyatakan</span></div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">3. Pengalaman menggunakan perkhidmatan dobi layan diri</label>
-          <div class="radio-group">
-            <div class="radio-item"><input type="radio" name="pengalaman" value="tidak_pernah" required><span>Tidak pernah</span></div>
-            <div class="radio-item"><input type="radio" name="pengalaman" value="kurang_sebulan"><span>Kurang daripada sekali sebulan</span></div>
-            <div class="radio-item"><input type="radio" name="pengalaman" value="1-3_sebulan"><span>1–3 kali sebulan</span></div>
-            <div class="radio-item"><input type="radio" name="pengalaman" value="lebih_3_sebulan"><span>Lebih daripada 3 kali sebulan</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bahagian B: Pengalaman Menggunakan Sistem -->
-      <div class="form-section">
-        <div class="section-title">Bahagian B: Pengalaman Menggunakan Sistem</div>
-        
-        <div class="form-group">
-          <label class="form-label">4. Sejauh mana anda bersetuju dengan penyataan berikut?</label>
-          <div style="margin-top: 12px;">
-            <div style="margin-bottom: 12px;">
-              <div style="margin-bottom: 6px; font-weight: 500;">Antara muka pengguna (UI) mudah difahami dan intuitif</div>
-              <div class="likert-row">
-                <div class="likert-item"><input type="radio" name="ui_mudah" value="1" required><span>1</span></div>
-                <div class="likert-item"><input type="radio" name="ui_mudah" value="2"><span>2</span></div>
-                <div class="likert-item"><input type="radio" name="ui_mudah" value="3"><span>3</span></div>
-                <div class="likert-item"><input type="radio" name="ui_mudah" value="4"><span>4</span></div>
-                <div class="likert-item"><input type="radio" name="ui_mudah" value="5"><span>5</span></div>
-              </div>
-            </div>
-            
-            <div style="margin-bottom: 12px;">
-              <div style="margin-bottom: 6px; font-weight: 500;">Proses memilih mesin adalah lancar dan tanpa keliru</div>
-              <div class="likert-row">
-                <div class="likert-item"><input type="radio" name="proses_lancar" value="1" required><span>1</span></div>
-                <div class="likert-item"><input type="radio" name="proses_lancar" value="2"><span>2</span></div>
-                <div class="likert-item"><input type="radio" name="proses_lancar" value="3"><span>3</span></div>
-                <div class="likert-item"><input type="radio" name="proses_lancar" value="4"><span>4</span></div>
-                <div class="likert-item"><input type="radio" name="proses_lancar" value="5"><span>5</span></div>
-              </div>
-            </div>
-            
-            <div style="margin-bottom: 12px;">
-              <div style="margin-bottom: 6px; font-weight: 500;">Sistem memberikan maklum balas masa nyata (contoh: status mesin, notifikasi)</div>
-              <div class="likert-row">
-                <div class="likert-item"><input type="radio" name="maklum_balas" value="1" required><span>1</span></div>
-                <div class="likert-item"><input type="radio" name="maklum_balas" value="2"><span>2</span></div>
-                <div class="likert-item"><input type="radio" name="maklum_balas" value="3"><span>3</span></div>
-                <div class="likert-item"><input type="radio" name="maklum_balas" value="4"><span>4</span></div>
-                <div class="likert-item"><input type="radio" name="maklum_balas" value="5"><span>5</span></div>
-              </div>
-            </div>
-            
-            <div style="margin-bottom: 12px;">
-              <div style="margin-bottom: 6px; font-weight: 500;">Reka bentuk visual (warna, susun atur, tipografi) kelihatan profesional</div>
-              <div class="likert-row">
-                <div class="likert-item"><input type="radio" name="reka_bentuk" value="1" required><span>1</span></div>
-                <div class="likert-item"><input type="radio" name="reka_bentuk" value="2"><span>2</span></div>
-                <div class="likert-item"><input type="radio" name="reka_bentuk" value="3"><span>3</span></div>
-                <div class="likert-item"><input type="radio" name="reka_bentuk" value="4"><span>4</span></div>
-                <div class="likert-item"><input type="radio" name="reka_bentuk" value="5"><span>5</span></div>
-              </div>
-            </div>
-            
-            <div>
-              <div style="margin-bottom: 6px; font-weight: 500;">Sistem berfungsi tanpa ralat semasa demo</div>
-              <div class="likert-row">
-                <div class="likert-item"><input type="radio" name="tanpa_ralat" value="1" required><span>1</span></div>
-                <div class="likert-item"><input type="radio" name="tanpa_ralat" value="2"><span>2</span></div>
-                <div class="likert-item"><input type="radio" name="tanpa_ralat" value="3"><span>3</span></div>
-                <div class="likert-item"><input type="radio" name="tanpa_ralat" value="4"><span>4</span></div>
-                <div class="likert-item"><input type="radio" name="tanpa_ralat" value="5"><span>5</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">5. Bagaimana anda menilai kelajuan respons sistem?</label>
-          <select class="form-select" name="kelajuan" required>
-            <option value="">Pilih...</option>
-            <option value="sangat_peralahan">Sangat perlahan</option>
-            <option value="perlahan">Peralahan</option>
-            <option value="sederhana">Sederhana</option>
-            <option value="pantas">Pantas</option>
-            <option value="sangat_pantas">Sangat pantas</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">6. Adakah anda menerima notifikasi WhatsApp seperti yang dijanjikan?</label>
-          <select class="form-select" name="notif_wa" required>
-            <option value="">Pilih...</option>
-            <option value="ya_tepat">Ya, tepat pada masanya</option>
-            <option value="ya_lewat">Ya, tetapi lewat</option>
-            <option value="tidak_terima">Tidak menerima langsung</option>
-            <option value="tidak_cuba">Tidak cuba fungsi ini</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Bahagian C: Nilai & Kepuasan Pengguna -->
-      <div class="form-section">
-        <div class="section-title">Bahagian C: Nilai & Kepuasan Pengguna</div>
-        
-        <div class="form-group">
-          <label class="form-label">7. Berapa kemungkinan anda akan menggunakan sistem DOBIABU jika ia tersedia di kawasan anda?</label>
-          <select class="form-select" name="kemungkinan_guna" required>
-            <option value="">Pilih...</option>
-            <option value="0">0% (Tidak akan guna)</option>
-            <option value="25">25%</option>
-            <option value="50">50%</option>
-            <option value="75">75%</option>
-            <option value="100">100% (Pasti akan guna)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">8. Apakah kelebihan utama sistem DOBIABU berbanding dobi konvensional? (Boleh pilih lebih daripada satu)</label>
-          <div class="checkbox-group" style="margin-top: 12px;">
-            <div class="checkbox-item"><input type="checkbox" name="kelebihan" value="tiada_operator"><span>Tiada interaksi dengan operator</span></div>
-            <div class="checkbox-item"><input type="checkbox" name="kelebihan" value="notif_wa"><span>Notifikasi masa nyata melalui WhatsApp</span></div>
-            <div class="checkbox-item"><input type="checkbox" name="kelebihan" value="bayaran_tunai"><span>Proses bayaran tanpa tunai</span></div>
-            <div class="checkbox-item"><input type="checkbox" name="kelebihan" value="status_sebenar"><span>Status mesin ketika sebenar</span></div>
-            <div class="checkbox-item"><input type="checkbox" name="kelebihan" value="reka_bentuk_moden"><span>Reka bentuk moden & mesra pengguna</span></div>
-          </div>
-          <input type="text" class="form-input" name="kelebihan_lain" placeholder="Lain-lain:" style="margin-top: 12px;">
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">9. Adakah ciri "Mod Penyelenggaraan" (untuk pemilik) meningkatkan keyakinan anda terhadap kebolehpercayaan sistem?</label>
-          <select class="form-select" name="mod_penyelenggaraan" required>
-            <option value="">Pilih...</option>
-            <option value="ya">Ya</option>
-            <option value="tidak">Tidak</option>
-            <option value="tidak_pasti">Tidak pasti</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Bahagian D & E -->
-      <div class="form-section">
-        <div class="section-title">Bahagian D & E: Cadangan & Penilaian Keseluruhan</div>
-        
-        <div class="form-group">
-          <label class="form-label">10. Apakah ciri tambahan yang anda cadangkan untuk sistem DOBIABU?</label>
-          <textarea class="form-textarea" name="cadangan_ciri" rows="2" placeholder="Contoh: Tambah sokongan pelbagai bahasa..."></textarea>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">11. Nyatakan sebarang isu teknikal atau pengalaman negatif semasa menggunakan sistem:</label>
-          <textarea class="form-textarea" name="isu_teknikal" rows="2"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">12. Secara keseluruhan, bagaimana anda menilai projek DOBIABU?</label>
-          <select class="form-select" name="penilaian_keseluruhan" required>
-            <option value="">Pilih...</option>
-            <option value="lemah">Lemah</option>
-            <option value="kurang_memuaskan">Kurang memuaskan</option>
-            <option value="memuaskan">Memuaskan</option>
-            <option value="baik">Baik</option>
-            <option value="cemarlang">Cemerlang</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">13. Adakah projek ini menunjukkan inovasi dalam bidang IoT dan perkhidmatan awam?</label>
-          <select class="form-select" name="inovasi_iot" required>
-            <option value="">Pilih...</option>
-            <option value="tidak_langsung">Tidak langsung</option>
-            <option value="sedikit">Sedikit</option>
-            <option value="sederhana">Sederhana</option>
-            <option value="tinggi">Tinggi</option>
-            <option value="sangat_tinggi">Sangat tinggi</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">14. Adakah sistem ini sesuai untuk dilaksanakan di institusi pendidikan (contoh: kolej, universiti)?</label>
-          <select class="form-select" name="sesuai_institusi" required>
-            <option value="">Pilih...</option>
-            <option value="sangat_tidak_sesuai">Sangat tidak sesuai</option>
-            <option value="tidak_sesuai">Tidak sesuai</option>
-            <option value="neutral">Neutral</option>
-            <option value="sesuai">Sesuai</option>
-            <option value="sangat_sesuai">Sangat sesuai</option>
-          </select>
-        </div>
-      </div>
-
-      <button type="submit" class="submit-btn">HANTAR SOAL SELIDIK</button>
-    </form>
-
-    <div class="success-message" id="successMessage">
-      Terima kasih! Maklum balas anda telah berjaya dihantar.
+    <div class="progress-bar">
+      <div class="step-indicator active">1</div>
+      <div class="step-indicator">2</div>
+      <div class="step-indicator">3</div>
+      <div class="step-indicator">4</div>
     </div>
+
+    <form id="dobiSurvey">
+      
+      <div class="form-step active">
+        <h2><i class="fas fa-user"></i> Maklumat Asas</h2>
+        
+        <label>Umur Anda</label>
+        <div class="radio-group">
+          <label class="radio-card"><input type="radio" name="umur" value="18-20"><span>18 - 20</span></label>
+          <label class="radio-card"><input type="radio" name="umur" value="21-23"><span>21 - 23</span></label>
+          <label class="radio-card"><input type="radio" name="umur" value="24+"><span>24 Ke Atas</span></label>
+        </div>
+
+        <label>Jantina</label>
+        <div class="radio-group">
+          <label class="radio-card"><input type="radio" name="jantina" value="Lelaki"><span>Lelaki</span></label>
+          <label class="radio-card"><input type="radio" name="jantina" value="Perempuan"><span>Perempuan</span></label>
+        </div>
+
+        <label>Pengalaman Menggunakan Dobi Layan Diri?</label>
+        <div class="radio-group">
+          <label class="radio-card"><input type="radio" name="pengalaman" value="Kerap"><span>Kerap</span></label>
+          <label class="radio-card"><input type="radio" name="pengalaman" value="Kadang-kadang"><span>Kadang-kadang</span></label>
+          <label class="radio-card"><input type="radio" name="pengalaman" value="Jarang"><span>Jarang</span></label>
+        </div>
+
+        <div class="btn-group" style="justify-content: flex-end;">
+          <button type="button" class="btn-next" onclick="nextStep(1)">Seterusnya <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="form-step">
+        <h2><i class="fas fa-star"></i> Pengalaman Pengguna</h2>
+        <p style="font-size:0.8rem; color:#aaa;">Skala 1 (Lemah) - 5 (Sangat Baik)</p>
+
+        <label>Adakah antaramuka (UI) mudah difahami?</label>
+        <div class="rating">
+          <input type="radio" name="ui_mudah" id="ui5" value="5"><label for="ui5"></label>
+          <input type="radio" name="ui_mudah" id="ui4" value="4"><label for="ui4"></label>
+          <input type="radio" name="ui_mudah" id="ui3" value="3"><label for="ui3"></label>
+          <input type="radio" name="ui_mudah" id="ui2" value="2"><label for="ui2"></label>
+          <input type="radio" name="ui_mudah" id="ui1" value="1"><label for="ui1"></label>
+        </div>
+
+        <label>Kelancaran proses pembayaran & imbas QR?</label>
+        <div class="rating">
+          <input type="radio" name="proses_lancar" id="pl5" value="5"><label for="pl5"></label>
+          <input type="radio" name="proses_lancar" id="pl4" value="4"><label for="pl4"></label>
+          <input type="radio" name="proses_lancar" id="pl3" value="3"><label for="pl3"></label>
+          <input type="radio" name="proses_lancar" id="pl2" value="2"><label for="pl2"></label>
+          <input type="radio" name="proses_lancar" id="pl1" value="1"><label for="pl1"></label>
+        </div>
+
+        <label>Penilaian Reka Bentuk (Design) Sistem</label>
+        <div class="rating">
+          <input type="radio" name="reka_bentuk" id="rb5" value="5"><label for="rb5"></label>
+          <input type="radio" name="reka_bentuk" id="rb4" value="4"><label for="rb4"></label>
+          <input type="radio" name="reka_bentuk" id="rb3" value="3"><label for="rb3"></label>
+          <input type="radio" name="reka_bentuk" id="rb2" value="2"><label for="rb2"></label>
+          <input type="radio" name="reka_bentuk" id="rb1" value="1"><label for="rb1"></label>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn-prev" onclick="prevStep(0)"><i class="fas fa-arrow-left"></i> Kembali</button>
+          <button type="button" class="btn-next" onclick="nextStep(2)">Seterusnya <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="form-step">
+        <h2><i class="fas fa-microchip"></i> Ciri Teknikal</h2>
+
+        <label>Kepuasan terhadap Notifikasi WhatsApp</label>
+        <div class="rating">
+          <input type="radio" name="notif_wa" id="nw5" value="5"><label for="nw5"></label>
+          <input type="radio" name="notif_wa" id="nw4" value="4"><label for="nw4"></label>
+          <input type="radio" name="notif_wa" id="nw3" value="3"><label for="nw3"></label>
+          <input type="radio" name="notif_wa" id="nw2" value="2"><label for="nw2"></label>
+          <input type="radio" name="notif_wa" id="nw1" value="1"><label for="nw1"></label>
+        </div>
+
+        <label>Kelebihan sistem ini (Boleh pilih lebih dari satu)</label>
+        <div class="checkbox-container">
+          <label class="check-card"><input type="checkbox" name="kelebihan" value="Jimat Masa"><span><i class="fas fa-clock"></i> Jimat Masa</span></label>
+          <label class="check-card"><input type="checkbox" name="kelebihan" value="User Friendly"><span><i class="fas fa-smile"></i> Mesra Pengguna</span></label>
+          <label class="check-card"><input type="checkbox" name="kelebihan" value="Sistematik"><span><i class="fas fa-tasks"></i> Sistematik</span></label>
+          <label class="check-card"><input type="checkbox" name="kelebihan" value="Inovatif"><span><i class="fas fa-lightbulb"></i> Inovatif</span></label>
+        </div>
+
+        <label>Adakah sistem ini sesuai untuk institusi anda?</label>
+        <div class="radio-group">
+          <label class="radio-card"><input type="radio" name="sesuai_institusi" value="Ya"><span>Ya</span></label>
+          <label class="radio-card"><input type="radio" name="sesuai_institusi" value="Mungkin"><span>Mungkin</span></label>
+          <label class="radio-card"><input type="radio" name="sesuai_institusi" value="Tidak"><span>Tidak</span></label>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn-prev" onclick="prevStep(1)"><i class="fas fa-arrow-left"></i> Kembali</button>
+          <button type="button" class="btn-next" onclick="nextStep(3)">Seterusnya <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="form-step">
+        <h2><i class="fas fa-comment-dots"></i> Maklum Balas</h2>
+
+        <label>Cadangan ciri tambahan?</label>
+        <input type="text" name="cadangan_ciri" placeholder="Contoh: Tambah e-wallet lain...">
+
+        <label>Sebarang isu teknikal ditemui?</label>
+        <textarea name="isu_teknikal" placeholder="Jika tiada, biarkan kosong."></textarea>
+
+        <label>Penilaian Keseluruhan Projek (1-10)</label>
+        <input type="range" name="penilaian_keseluruhan" min="1" max="10" value="8" oninput="this.nextElementSibling.value = this.value" style="width:100%">
+        <output style="font-weight:bold; color:var(--primary); display:block; text-align:center;">8</output>
+
+        <div class="btn-group">
+          <button type="button" class="btn-prev" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Kembali</button>
+          <button type="submit" class="btn-submit" id="submitBtn">HANTAR KAJIAN <i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+
+    </form>
   </div>
 
   <script>
-    document.getElementById('surveyForm').addEventListener('submit', function(e) {
+    // --- KONFIGURASI URL ---
+    // PASTE URL SCRIPT ANDA DI SINI
+    const SCRIPT_URL = 'URL_WEB_APP_ANDA_DI_SINI'; 
+
+    let currentStep = 0;
+    const steps = document.querySelectorAll(".form-step");
+    const indicators = document.querySelectorAll(".step-indicator");
+
+    function showStep(n) {
+      steps.forEach((step, index) => {
+        step.classList.remove("active");
+        if(index === n) step.classList.add("active");
+      });
+      
+      indicators.forEach((ind, index) => {
+        ind.classList.remove("active");
+        if(index <= n) ind.classList.add("active");
+      });
+    }
+
+    function nextStep(n) {
+      // Validasi mudah (boleh tambah validation ketat jika perlu)
+      currentStep = n;
+      showStep(currentStep);
+    }
+
+    function prevStep(n) {
+      currentStep = n;
+      showStep(currentStep);
+    }
+
+    document.getElementById('dobiSurvey').addEventListener('submit', function(e) {
       e.preventDefault();
       
+      const btn = document.getElementById('submitBtn');
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sedang Hantar...';
+      btn.disabled = true;
+
+      // Kumpul Data Form
       const formData = new FormData(this);
       const data = {};
       
-      // Handle checkbox array
-      const checkboxes = formData.getAll('kelebihan');
-      data.kelebihan = checkboxes.join(', ');
-      
-      // Ambil semua data lain
-      for (let [key, value] of formData.entries()) {
-        if (key !== 'kelebihan') {
-          data[key] = value;
+      // Convert FormData ke Object
+      formData.forEach((value, key) => {
+        // Handle Checkbox array
+        if(data[key]){
+            if(!Array.isArray(data[key])){
+                data[key] = [data[key]];
+            }
+            data[key].push(value);
+        } else {
+            data[key] = value;
         }
+      });
+      
+      // Jika checkbox array, join jadi string
+      if(Array.isArray(data.kelebihan)) {
+        data.kelebihan = data.kelebihan.join(", ");
       }
 
-      // 🔥 URL WEB APP ANDA
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbw4oc7yd3f8QvAkRSLFZNeMsBzEcl1NGqhh9LXg-OFaqhEe-q5whKN8mWBg4-kdSAroLQ/exec';
-      
-      fetch(scriptURL, { 
+      // Default value kosong untuk field yang tidak diisi
+      const allFields = ['ui_mudah', 'proses_lancar', 'reka_bentuk', 'notif_wa', 'tanpa_ralat', 'kelajuan', 'inovasi_iot', 'maklum_balas', 'mod_penyelenggaraan', 'kelebihan_lain'];
+      allFields.forEach(f => {
+        if (!data[f]) data[f] = ""; 
+      });
+
+      // Hantar ke Google Script
+      fetch(SCRIPT_URL, {
         method: 'POST',
-        body: JSON.stringify(data),
-        headers: {'Content-Type': 'application/json'}
+        mode: 'no-cors', // Penting untuk elak error CORS
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
       })
-      .then(response => {
-        if (response.ok) {
-          document.getElementById('surveyForm').style.display = 'none';
-          document.getElementById('successMessage').style.display = 'block';
-        } else {
-          alert('Ralat: Data tidak berjaya dihantar.');
-        }
+      .then(() => {
+        alert("Terima kasih! Kajian selidik anda telah berjaya disimpan.");
+        window.location.reload();
       })
       .catch(error => {
         console.error('Error:', error);
-        alert('Sila semak sambungan internet anda.');
+        alert("Ralat semasa menghantar. Sila cuba lagi.");
+        btn.innerHTML = 'HANTAR KAJIAN';
+        btn.disabled = false;
       });
     });
   </script>
+
 </body>
 </html>
